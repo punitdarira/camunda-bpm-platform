@@ -500,6 +500,11 @@ public interface HistoricProcessInstanceQuery extends Query<HistoricProcessInsta
   HistoricProcessInstanceQuery internallyTerminated();
 
   /**
+   * Only select historic process instances that were created by the given restart batch ID
+   */
+  HistoricProcessInstanceQuery restartedByBatch(String batchId);
+
+  /**
    * <p>After calling or(), a chain of several filter criteria could follow. Each filter criterion that follows or()
    * will be linked together with an OR expression until the OR query is terminated. To terminate the OR query right
    * after the last filter criterion was applied, {@link #endOr()} must be invoked.</p>

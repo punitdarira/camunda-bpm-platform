@@ -119,6 +119,7 @@ public class HistoricProcessInstanceQueryDto extends AbstractQueryDto<HistoricPr
   private Boolean externallyTerminated;
   private Boolean internallyTerminated;
   private List<String> incidentIds;
+  private String restartedByBatch;
 
   private List<VariableQueryParameterDto> variables;
 
@@ -405,6 +406,11 @@ public class HistoricProcessInstanceQueryDto extends AbstractQueryDto<HistoricPr
     this.internallyTerminated = internallyTerminated;
   }
 
+  @CamundaQueryParam(value = "restartedByBatch")
+  public void setRestartedByBatch(String restartedByBatch) {
+    this.restartedByBatch = restartedByBatch;
+  }
+
   @Override
   protected boolean isValidSortByValue(String value) {
     return VALID_SORT_BY_VALUES.contains(value);
@@ -611,6 +617,9 @@ public class HistoricProcessInstanceQueryDto extends AbstractQueryDto<HistoricPr
     }
     if (internallyTerminated != null && internallyTerminated) {
       query.internallyTerminated();
+    }
+    if (restartedByBatch != null) {
+      query.restartedByBatch(restartedByBatch);
     }
   }
 

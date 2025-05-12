@@ -104,6 +104,7 @@ public class HistoricProcessInstanceQueryImpl extends AbstractVariableQueryImpl<
   protected boolean isOrQueryActive = false;
 
   protected Map<String, Set<QueryVariableValue>> queryVariableNameToValuesMap = new HashMap<>();
+  protected String restartedByBatch;
 
   public HistoricProcessInstanceQueryImpl() {
   }
@@ -862,6 +863,11 @@ public class HistoricProcessInstanceQueryImpl extends AbstractVariableQueryImpl<
     ensureNull(BadUserRequestException.class, "Already querying for historic process instance with another state", state, state);
     state = HistoricProcessInstance.STATE_INTERNALLY_TERMINATED;
     return this;
+  }
+
+  public HistoricProcessInstanceQuery restartedByBatch(String batchId) {
+    this.restartedByBatch = batchId;
+    return null;
   }
 
   @Override
